@@ -64,7 +64,8 @@ def validate_password(password: str) -> bool:
     """
     Description:
         Validates the password according to the given criteria using regular expressions.
-        The password must be at least 8 characters long, contain at least one uppercase letter, and include at least one numeric digit.
+        The password must be at least 8 characters long, contain at least one uppercase letter,
+        include at least one numeric digit, and have exactly one special character.
     Parameter:
         password (str): The password to validate.
     Return:
@@ -73,8 +74,16 @@ def validate_password(password: str) -> bool:
     # Rule1: Minimum 8 characters
     # Rule2: At least one uppercase letter
     # Rule3: At least one numeric digit
-    pattern = r'^(?=.*[A-Z])(?=.*\d).{8,}$'
-    return bool(re.search(pattern, password))
+    # Rule4: Exactly one special character
+    pattern = r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"\'<>,.?/~`-]).{8,}$'
+    
+    if not re.search(pattern, password):
+        return False
+    
+    # Ensure exactly one special character
+    special_char_count = len(re.findall(r'[!@#$%^&*()_+{}\[\]:;"\'<>,.?/~`-]', password))
+    
+    return special_char_count == 1
 
 
 def get_user_input(prompt: str) -> str:
@@ -102,9 +111,13 @@ def main():
     last_name = get_user_input("Enter a valid Last Name: ")
     email = get_user_input("Enter a valid Email: ")
     mobile_number = get_user_input("Enter a valid Mobile Number (e.g., 91 9919819801): ")
-    password = get_user_input("Enter a valid Password (minimum 8 characters, at least one uppercase letter, and at least one numeric digit): ")
+    password = get_user_input("Enter a valid Password (minimum 8 characters, at least one uppercase letter, at least one numeric digit, and exactly one special character): ")
 
-    if validate_first_name(first_name) and validate_last_name(last_name) and validate_email(email) and validate_mobile_number(mobile_number) and validate_password(password):
+    if (validate_first_name(first_name) and 
+        validate_last_name(last_name) and 
+        validate_email(email) and 
+        validate_mobile_number(mobile_number) and 
+        validate_password(password)):
         print("Valid Name, Email, Mobile Number, and Password")
     else:
         print("Invalid Name, Email, Mobile Number, or Password")
