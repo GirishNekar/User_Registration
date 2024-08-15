@@ -3,7 +3,7 @@
 @Date: 2024-08-12
 @Last Modified by: Girish
 @Last Modified time: 2024-08-12
-@Title: Unit tests for validating first name, last name, email, and mobile number
+@Title: Unit tests for validating first name, last name, email, mobile number, and password
 """
 
 import unittest
@@ -12,11 +12,12 @@ from UC import (
     validate_last_name,
     validate_email,
     validate_mobile_number,
+    validate_password,
 )
 
 class TestUserValidation(unittest.TestCase):
     """
-    Unit test class for validating the functionality of first name, last name, email, and mobile number validation.
+    Unit test class for validating the functionality of first name, last name, email, mobile number, and password validation.
     """
 
     def test_valid_first_name(self):
@@ -96,6 +97,19 @@ class TestUserValidation(unittest.TestCase):
         self.assertFalse(validate_mobile_number("91-9919819801"), "Should be invalid due to incorrect separator")
         self.assertFalse(validate_mobile_number("9919819801"), "Should be invalid due to missing country code")
         self.assertFalse(validate_mobile_number("91 99198198O1"), "Should be invalid due to non-numeric characters")
+
+    def test_valid_password(self):
+        """
+        Description:
+            Tests the validation function for passwords.
+        Parameters:
+            self: Instance of the class.
+        Return:
+            None
+        """
+        self.assertTrue(validate_password("StrongPass123"), "Should be valid")
+        self.assertFalse(validate_password("pass123"), "Should be invalid due to length")
+
 
 
 if __name__ == "__main__":
