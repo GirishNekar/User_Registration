@@ -7,7 +7,7 @@
 """
 
 import unittest
-from UC import validate_first_name
+from UC import validate_first_name,validate_last_name
 
 class TestNameValidation(unittest.TestCase):
     """
@@ -39,7 +39,16 @@ class TestNameValidation(unittest.TestCase):
         self.assertFalse(validate_first_name("John123"), "Should be invalid due to  presence of a Number")
         self.assertFalse(validate_first_name("Alice456"), "Should be invalid due to  presence of a Number")
 
-        
+        self.assertTrue(validate_last_name("John"),"Should be valid")
+        self.assertTrue(validate_last_name("Alice"),"Should be valid")
+        self.assertFalse(validate_last_name("Jo"), "Should be invalid due to length")
+        self.assertFalse(validate_last_name("Al"), "Should be invalid due to length")
+        self.assertFalse(validate_last_name("john"),"Should be invalid due to lowercase first letter")
+        self.assertFalse(validate_last_name("alice"),"Should be invalid due to lowercase first letter")
+        self.assertFalse(validate_last_name("Jo@n"), "Should be invalid due to  presence of a special character")
+        self.assertFalse(validate_last_name("Al!ce"),  "Should be invalid due to  presence of a special character")
+        self.assertFalse(validate_last_name("John123"), "Should be invalid due to  presence of a Number")
+        self.assertFalse(validate_last_name("Alice456"), "Should be invalid due to  presence of a Number")
 
 if __name__ == "__main__":
     unittest.main()

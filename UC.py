@@ -3,7 +3,7 @@
 @Date: 2024-08-14
 @Last Modified by: Girish
 @Last Modified time: 2024-08-14
-@Title: Check for Users First name is Valid or not
+@Title: Check for Users First name and Last name is Valid or not
 """
 
 import re
@@ -24,7 +24,21 @@ def validate_first_name(first_name: str) -> bool:
     pattern = r'^[A-Z][A-Za-z]{2,}$'
     return bool(re.search(pattern, first_name))
 
-
+def validate_last_name(last_name: str) -> bool:
+    
+    
+    """
+    Descripton: 
+        Checks for the valid name
+    param name: 
+        The name to validate.
+    return: 
+        True if the name is valid, False otherwise.
+    """
+    
+    
+    pattern = r'^[A-Z][A-Za-z]{2,}$'
+    return bool(re.search(pattern, last_name))
 
 
 def get_user_input() -> str:
@@ -46,8 +60,8 @@ def get_user_input() -> str:
 def main():
 
     first_name = get_user_input()
-
-    if validate_first_name(first_name):
+    last_name = get_user_input()
+    if validate_first_name(first_name) and validate_last_name(last_name):
         print("Valid Name")
     else:
         print("Invalid Name")
