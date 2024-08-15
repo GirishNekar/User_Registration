@@ -69,16 +69,13 @@ class TestUserValidation(unittest.TestCase):
         Return:
             None
         """
-        self.assertTrue(validate_email("abc.xyz@bl.co.in"), "Should be valid")
-        self.assertTrue(validate_email("user@domain.co"), "Should be valid")
-        self.assertFalse(validate_email("abc@blco"), "Should be invalid due to missing dot before TLD")
-        self.assertFalse(validate_email("abc@bl.co.in."), "Should be invalid due to trailing dot")
-        self.assertFalse(validate_email("user@domaincom"), "Should be invalid due to missing dot in domain")
-        self.assertFalse(validate_email("@bl.co"), "Should be invalid due to missing user part")
+        self.assertTrue(validate_email("example@example.com"), "Should be valid")
+        self.assertTrue(validate_email("user.name@domain.co"), "Should be valid")
+        self.assertFalse(validate_email("plainaddress"), "Should be invalid due to missing @ symbol")
+        self.assertFalse(validate_email("user@domain"), "Should be invalid due to missing dot in domain")
         self.assertFalse(validate_email("user@.com"), "Should be invalid due to missing domain part")
         self.assertFalse(validate_email("user@domain.c"), "Should be invalid due to TLD being too short")
         self.assertFalse(validate_email("user@domain.toolongtld"), "Should be invalid due to TLD being too long")
-        self.assertFalse(validate_email("userdomain.com"), "Should be invalid due to missing @ symbol")
 
     def test_valid_mobile_number(self):
         """

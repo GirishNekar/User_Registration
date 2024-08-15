@@ -71,16 +71,11 @@ def validate_password(password: str) -> bool:
     Return:
         bool: True if the password is valid, False otherwise.
     """
-    # Rule1: Minimum 8 characters
-    # Rule2: At least one uppercase letter
-    # Rule3: At least one numeric digit
-    # Rule4: Exactly one special character
     pattern = r'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;"\'<>,.?/~`-]).{8,}$'
     
     if not re.search(pattern, password):
         return False
     
-    # Ensure exactly one special character
     special_char_count = len(re.findall(r'[!@#$%^&*()_+{}\[\]:;"\'<>,.?/~`-]', password))
     
     return special_char_count == 1
@@ -110,7 +105,7 @@ def main():
     first_name = get_user_input("Enter a valid First Name: ")
     last_name = get_user_input("Enter a valid Last Name: ")
     email = get_user_input("Enter a valid Email: ")
-    mobile_number = get_user_input("Enter a valid Mobile Number (e.g., 91 9919819801): ")
+    mobile_number = get_user_input("Enter a valid Mobile Number: ")
     password = get_user_input("Enter a valid Password (minimum 8 characters, at least one uppercase letter, at least one numeric digit, and exactly one special character): ")
 
     if (validate_first_name(first_name) and 
