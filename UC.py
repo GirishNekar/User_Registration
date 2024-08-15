@@ -3,7 +3,7 @@
 @Date: 2024-08-12
 @Last Modified by: Girish
 @Last Modified time: 2024-08-12
-@Title: Validate User's First Name, Last Name, and Email
+@Title: Validate User's First Name, Last Name, Email, and Mobile Number
 """
 
 import re
@@ -47,6 +47,19 @@ def validate_email(email: str) -> bool:
     return bool(re.search(pattern, email))
 
 
+def validate_mobile_number(mobile: str) -> bool:
+    """
+    Description:
+        Validates the mobile number format according to the given criteria.
+    Parameter:
+        mobile (str): The mobile number to validate.
+    Return:
+        bool: True if the mobile number is valid, False otherwise.
+    """
+    pattern = r'^\d{2} \d{10}$'
+    return bool(re.search(pattern, mobile))
+
+
 def get_user_input(prompt: str) -> str:
     """
     Description : 
@@ -62,7 +75,7 @@ def get_user_input(prompt: str) -> str:
 def main():
     """
     Description:
-        Main function to validate the user's first name, last name, and email.
+        Main function to validate the user's first name, last name, email, and mobile number.
     Parameter:
         None
     Return:
@@ -71,11 +84,12 @@ def main():
     first_name = get_user_input("Enter a valid First Name: ")
     last_name = get_user_input("Enter a valid Last Name: ")
     email = get_user_input("Enter a valid Email: ")
+    mobile_number = get_user_input("Enter a valid Mobile Number (e.g., 91 9919819801): ")
 
-    if validate_first_name(first_name) and validate_last_name(last_name) and validate_email(email):
-        print("Valid Name and Email")
+    if validate_first_name(first_name) and validate_last_name(last_name) and validate_email(email) and validate_mobile_number(mobile_number):
+        print("Valid Name, Email, and Mobile Number")
     else:
-        print("Invalid Name or Email")
+        print("Invalid Name, Email, or Mobile Number")
 
 
 if __name__ == "__main__":
