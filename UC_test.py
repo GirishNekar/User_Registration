@@ -109,8 +109,8 @@ class TestUserValidation(unittest.TestCase):
         """
         self.assertTrue(validate_password("StrongPass123"), "Should be valid")
         self.assertFalse(validate_password("pass123"), "Should be invalid due to length")
-
-
+        self.assertFalse(validate_password("Strongpass123"), "Should be invalid due to missing uppercase letter")
+        self.assertFalse(validate_password("STRONGPASS"), "Should be invalid due to missing digits")
 
 if __name__ == "__main__":
     unittest.main()
